@@ -1,3 +1,7 @@
 body {
     background: linen;
 }
+
+canvas {
+  border: solid 1px black;
+}
