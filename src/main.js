@@ -5,51 +5,41 @@ const webglUtils = require('./webgl-utils')
 
 
 const canvas = document.getElementById("c")
-
-// INITIALIZATION CODE
 const gl = canvas.getContext("webgl")
-if (!gl) {
-  console.log('No GL!!!')
-}
+
+const vertexShaderSource = document.getElementById("2d-vertex-shader").text
+const fragmentShaderSource = document.getElementById("2d-fragment-shader").text
 
 function createShader(gl, type, source) {
-  var shader = gl.createShader(type)
+  const shader = gl.createShader(type)
   gl.shaderSource(shader, source)
   gl.compileShader(shader)
-  var success = gl.getShaderParameter(shader, gl.COMPILE_STATUS)
-  if (success) {
-    return shader
-  }
+  const success = gl.getShaderParameter(shader, gl.COMPILE_STATUS)
+  if (success) return shader
 
   console.log(gl.getShaderInfoLog(shader))
   gl.deleteShader(shader)
 }
 
-var vertexShaderSource = document.getElementById("2d-vertex-shader").text
-var fragmentShaderSource = document.getElementById("2d-fragment-shader").text
-
-var vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource)
-var fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource)
 function createProgram(gl, vertexShader, fragmentShader) {
-  var program = gl.createProgram()
+  const program = gl.createProgram()
   gl.attachShader(program, vertexShader)
   gl.attachShader(program, fragmentShader)
   gl.linkProgram(program)
-  var success = gl.getProgramParameter(program, gl.LINK_STATUS)
-  if (success) {
-    return program
-  }
+  const success = gl.getProgramParameter(program, gl.LINK_STATUS)
+  if (success) return program
 
   console.log(gl.getProgramInfoLog(program))
   gl.deleteProgram(program)
 }
 
-var program = createProgram(gl, vertexShader, fragmentShader)
 
-var positionAttributeLocation = gl.getAttribLocation(program, "a_position")
+const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource)
+const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource)
+const program = createProgram(gl, vertexShader, fragmentShader)
+const positionAttributeLocation = gl.getAttribLocation(program, "a_position")
 
-var positionBuffer = gl.createBuffer()
-
+const positionBuffer = gl.createBuffer()
 gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
 
 // three 2d points
