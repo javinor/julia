@@ -2,7 +2,7 @@
 
 const webglUtils = require('./webgl-utils')
 
-const canvas = document.getElementById('mandelbrot')
+const canvas = document.getElementById('julia')
 const gl = canvas.getContext('webgl') // TODO debug
 
 const mandelbrotShaders = require('./mandelbrotShaders')
@@ -14,8 +14,9 @@ const fragmentShader = webglUtils.createShader(gl, gl.FRAGMENT_SHADER, fragmentS
 const program = webglUtils.createProgram(gl, vertexShader, fragmentShader)
 
 const positionAttributeLocation = gl.getAttribLocation(program, 'a_position')
-const resolutionUniformLocation = gl.getUniformLocation(program, 'u_resolution')
-const colorUniformLocation = gl.getUniformLocation(program, 'u_color')
+
+const bordersUniformLocation = gl.getUniformLocation(program, 'u_borders')
+const cUniformLocation = gl.getUniformLocation(program, 'c')
 
 const positionBuffer = gl.createBuffer()
 gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
@@ -43,7 +44,6 @@ function drawMandelbrot() {
 
   // Tell it to use our program (pair of shaders)
   gl.useProgram(program)
-  // gl.uniform2f(resolutionUniformLocation, gl.canvas.width, gl.canvas.height);
 
   gl.enableVertexAttribArray(positionAttributeLocation)
   gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer)
@@ -55,7 +55,9 @@ function drawMandelbrot() {
   var offset = 0        // start at the beginning of the buffer
   gl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset)
 
-  gl.uniform4f(colorUniformLocation, Math.random(), Math.random(), Math.random(), 1);
+  gl.uniform4f(bordersUniformLocation, 2, 2, -2, -2)
+  gl.uniform2f(cUniformLocation, -0.828, -0.306)
+
   gl.drawArrays(gl.TRIANGLES, 0, positions.length / 2)
 }
 

@@ -3,7 +3,7 @@
 const webglUtils = require('./webgl-utils')
 
 const canvas = document.getElementById("c")
-const gl = canvas.getContext("webgl") // TODO debug
+const gl = window.gl = canvas.getContext("webgl") // TODO debug
 
 const vertexShaderSource = `
   // an attribute will receive data from a buffer
