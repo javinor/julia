@@ -21,7 +21,7 @@ const fragmentShaderSource = `
   varying vec2 v_position;
 
   void main() {
-    int count = 0;
+    float count = 0;
     vec2 z = v_position;
 
     for (int i = 0; i < 100; i++) {
@@ -32,13 +32,13 @@ const fragmentShaderSource = `
 
       if (length(z) > 2.0) break;
 
-      count++;
+      count += 1.0;
     }
 
     if (count >= 10) {
       gl_FragColor = vec4(1, 1, 1, 1);
     } else {
-      gl_FragColor = vec4(0, 0, 0, 1);
+      gl_FragColor = vec4(sin(count * 2.0), count, sin(count * 2.0), 1.0);
     }
   }
 

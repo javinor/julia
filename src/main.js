@@ -2,4 +2,5 @@
 
 require('./main.css')
 require('./rectangles')
-require('./mandelbrot')
+require('./julia')
+// require('./mandelbrot')
