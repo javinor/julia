@@ -1,6 +1,9 @@
 'use strict'
 
 require('./main.css')
-require('./rectangles')
-require('./julia')
-// require('./mandelbrot')
+
+import Julia from './julia'
+
+const canvas = document.getElementById('julia')
+const julia = new Julia({canvas})
+julia.render()
