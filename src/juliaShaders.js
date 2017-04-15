@@ -35,7 +35,7 @@ const fragmentShaderSource = `
     float tempX;
     float tempY;
 
-    for (int i = 0; i < 4000; i++) {
+    for (int i = 0; i < 1000; i++) {
       iter += 1.0;
       tempX = x * x - y * y;
       tempY = 2.0 * x * y;
