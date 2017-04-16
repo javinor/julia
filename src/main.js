@@ -25,3 +25,10 @@ const rerenderJulia = (e) => {
 
 canvas.addEventListener('mousedown', () => canvas.addEventListener('mousemove', rerenderJulia))
 canvas.addEventListener('mouseup', () => canvas.removeEventListener('mousemove', rerenderJulia))
+canvas.addEventListener('dblclick', (e) => {
+  const pixelToDistanceRatio = renderOptions.xLength / width
+  // renderOptions.complexCenter[0] -= e.offsetX * pixelToDistanceRatio
+  // renderOptions.complexCenter[1] += e.movementY * pixelToDistanceRatio
+  renderOptions.xLength /= 2
+  window.requestAnimationFrame(julia.render.bind(julia, renderOptions))
+})
