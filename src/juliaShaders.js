@@ -6,27 +6,27 @@ const vertexShaderSource = `
   uniform vec2 center;
   uniform vec2 axisLengths;
 
-  varying vec2 v_position;
+  varying vec2 complexPoint;
 
   void main() {
     gl_Position = vec4(a_position, 0, 1);
 
-    v_position = a_position * axisLengths + center;
+    complexPoint = a_position * axisLengths + center;
   }
 `
 const fragmentShaderSource = `
   precision highp float;
 
   uniform vec2 constant;
-  varying vec2 v_position;
+  varying vec2 complexPoint;
 
   void main() {
     vec4 black = vec4(0, 0, 0, 1);
     vec4 color = vec4(0, 0, 0, 1);
 
     float iter = 0.0;
-    float x = v_position.x;
-    float y = v_position.y;
+    float x = complexPoint.x;
+    float y = complexPoint.y;
     float tempX;
     float tempY;
 
