@@ -17,7 +17,7 @@ const vertexShaderSource = `
 const fragmentShaderSource = `
   precision highp float;
 
-  uniform vec2 c;
+  uniform vec2 constant;
   varying vec2 v_position;
 
   void main() {
@@ -35,8 +35,8 @@ const fragmentShaderSource = `
       tempX = x * x - y * y;
       tempY = 2.0 * x * y;
 
-      x = tempX + c.x;
-      y = tempY + c.y;
+      x = tempX + constant.x;
+      y = tempY + constant.y;
 
       if (length(vec2(x,y)) > 4.0) break;
     }

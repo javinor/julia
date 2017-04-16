@@ -37,7 +37,7 @@ export default class {
     const gl = this.gl
     const program = this.program
 
-    const cUniformLocation = gl.getUniformLocation(program, 'c')
+    const constantUniformLocation = gl.getUniformLocation(program, 'constant')
     const centerUniformLocation = gl.getUniformLocation(program, 'center')
     const axisLengthsUniformLocation = gl.getUniformLocation(program, 'axisLengths')
 
@@ -47,7 +47,7 @@ export default class {
     gl.clearColor(0, 0, 0, 0)
     gl.clear(gl.COLOR_BUFFER_BIT)
 
-    gl.uniform2f(cUniformLocation, -0.828, -0.180)
+    gl.uniform2f(constantUniformLocation, -0.828, -0.180)
     gl.uniform2f(centerUniformLocation, 0, 0)
     gl.uniform2f(axisLengthsUniformLocation, 4, 4 * gl.canvas.height / gl.canvas.width)
 
