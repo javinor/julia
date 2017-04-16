@@ -33,7 +33,11 @@ export default class {
     gl.useProgram(program)
   }
 
-  render() {
+  render({
+    constant = [-0.828, -0.180],
+    center = [0, 0],
+    xLength = 4
+  } = {}) {
     const gl = this.gl
     const program = this.program
 
@@ -47,9 +51,10 @@ export default class {
     gl.clearColor(0, 0, 0, 0)
     gl.clear(gl.COLOR_BUFFER_BIT)
 
-    gl.uniform2f(constantUniformLocation, -0.828, -0.180)
-    gl.uniform2f(centerUniformLocation, 0, 0)
-    gl.uniform2f(axisLengthsUniformLocation, 4, 4 * gl.canvas.height / gl.canvas.width)
+    const yLength = xLength * gl.canvas.height / gl.canvas.width
+    gl.uniform2f(axisLengthsUniformLocation, xLength, yLength)
+    gl.uniform2f(constantUniformLocation, ...constant)
+    gl.uniform2f(centerUniformLocation, ...center)
 
     gl.drawArrays(gl.TRIANGLES, 0, 6)
   }
