@@ -35,14 +35,14 @@ export default class {
 
   render({
     constant = [-0.828, -0.180],
-    center = [0, 0],
+    complexCenter = [0, 0],
     xLength = 4
   } = {}) {
     const gl = this.gl
     const program = this.program
 
     const constantUniformLocation = gl.getUniformLocation(program, 'constant')
-    const centerUniformLocation = gl.getUniformLocation(program, 'center')
+    const centerUniformLocation = gl.getUniformLocation(program, 'complexCenter')
     const axisLengthsUniformLocation = gl.getUniformLocation(program, 'axisLengths')
 
     webglUtils.resizeCanvasToDisplaySize(gl.canvas)
@@ -52,7 +52,7 @@ export default class {
     const yLength = xLength * gl.canvas.height / gl.canvas.width
     gl.uniform2f(axisLengthsUniformLocation, xLength, yLength)
     gl.uniform2f(constantUniformLocation, ...constant)
-    gl.uniform2f(centerUniformLocation, ...center)
+    gl.uniform2f(centerUniformLocation, ...complexCenter)
 
     gl.drawArrays(gl.TRIANGLES, 0, 6)
   }
