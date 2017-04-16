@@ -3,20 +3,15 @@
 const vertexShaderSource = `
   attribute vec2 a_position;
 
-  uniform float bottom;
-  uniform float left;
-  uniform float height;
-  uniform float width;
+  uniform vec2 center;
+  uniform vec2 axisLengths;
 
   varying vec2 v_position;
 
   void main() {
     gl_Position = vec4(a_position, 0, 1);
 
-    float x = ((a_position.x + 1.0) / 2.0) * width + left;
-    float y = ((a_position.y + 1.0) / 2.0) * height + bottom;
-
-    v_position = vec2(x, y);
+    v_position = a_position * axisLengths + center;
   }
 `
 const fragmentShaderSource = `

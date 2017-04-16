@@ -38,10 +38,8 @@ export default class {
     const program = this.program
 
     const cUniformLocation = gl.getUniformLocation(program, 'c')
-    const bottomUniformLocation = gl.getUniformLocation(program, 'bottom')
-    const leftUniformLocation = gl.getUniformLocation(program, 'left')
-    const heightUniformLocation = gl.getUniformLocation(program, 'height')
-    const widthUniformLocation = gl.getUniformLocation(program, 'width')
+    const centerUniformLocation = gl.getUniformLocation(program, 'center')
+    const axisLengthsUniformLocation = gl.getUniformLocation(program, 'axisLengths')
 
     webglUtils.resizeCanvasToDisplaySize(gl.canvas)
     gl.viewport(0, 0, gl.canvas.width, gl.canvas.height)
@@ -50,10 +48,8 @@ export default class {
     gl.clear(gl.COLOR_BUFFER_BIT)
 
     gl.uniform2f(cUniformLocation, -0.828, -0.180)
-    gl.uniform1f(bottomUniformLocation, -2)
-    gl.uniform1f(leftUniformLocation, -2)
-    gl.uniform1f(heightUniformLocation, 4)
-    gl.uniform1f(widthUniformLocation, 4)
+    gl.uniform2f(centerUniformLocation, 0, 0)
+    gl.uniform2f(axisLengthsUniformLocation, 4, 4 * gl.canvas.height / gl.canvas.width)
 
     gl.drawArrays(gl.TRIANGLES, 0, 6)
   }
