@@ -43,9 +43,13 @@ const fragmentShaderSource = `
 
     if (length(vec2(x,y)) > 4.0) {
       iter -= log2(log2(length(vec2(x,y))));
-      color.r = 0.5 + 0.50 * sin(iter);
-      color.g = 0.5 + 0.25 * sin(iter);
-      color.b = 0.5 - 0.25 * cos(iter);
+      // color.r = 0.5 + 0.50 * sin(iter);
+      // color.g = 0.5 + 0.25 * sin(iter);
+      // color.b = 0.5 - 0.25 * cos(iter);
+
+      color.r = 0.5 + 0.5 * sin(iter);
+      color.g = 0.5 + 0.5 * cos(iter);
+      color.b = 0.5 - 0.5 * sin(iter);
       color.a = 1.0;
 
       gl_FragColor = color;
