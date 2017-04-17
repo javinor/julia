@@ -1,8 +1,8 @@
 'use strict'
 
-const webglUtils = require('./utils/webgl-utils')
-const vertexShaderSource = require('./shaders/julia.vertex.glsl')
-const fragmentShaderSource = require('./shaders/julia.fragment.glsl')
+import webglUtils from './utils/webgl-utils'
+import vertexShaderSource from './shaders/julia.vertex.glsl'
+import fragmentShaderSource from './shaders/julia.fragment.glsl'
 
 export default class {
   constructor({canvas}) {

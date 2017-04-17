@@ -1,6 +1,6 @@
 'use strict'
 
-require('./main.css')
+import './main.css'
 import Julia from './julia'
 import Debouncer from './utils/Debouncer'
 
