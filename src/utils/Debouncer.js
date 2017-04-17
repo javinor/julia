@@ -11,10 +11,10 @@ export default class Debouncer {
     this.busy = false
   }
 
-  exec(args) {
+  exec(...args) {
     if (!this.busy) {
       requestAnimationFrame(() => {
-        this.callback(args)
+        this.callback(...args)
         this.busy = false
       })
       this.busy = true
