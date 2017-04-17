@@ -15,7 +15,7 @@ const julia = new Julia({
 const debouncedRender = new Debouncer(() => julia.render())
 window.onresize = () => debouncedRender.exec()
 
-let prevMouseCoords;
+let prevMouseCoords
 const debouncedMousePan = new Debouncer((e) => {
   const pixelDeltaX = e.clientX - prevMouseCoords.x
   const pixelDeltaY = e.clientY - prevMouseCoords.y
@@ -34,11 +34,11 @@ const debouncedKeyboardZoom = new Debouncer((multiplier) => julia.zoom(multiplie
 const debouncedKeyboardPan = new Debouncer((dx, dy) => julia.pan(dx, dy))
 document.addEventListener('keydown', (e) => {
   switch (e.key) {
-    case 'a': debouncedKeyboardZoom.exec(0.9); break;
-    case 'z': debouncedKeyboardZoom.exec(1.1); break;
-    case 'ArrowUp': debouncedKeyboardPan.exec(0, 5); break;
-    case 'ArrowRight': debouncedKeyboardPan.exec(-5, 0); break;
-    case 'ArrowDown': debouncedKeyboardPan.exec(0, -5); break;
-    case 'ArrowLeft': debouncedKeyboardPan.exec(5, 0); break;
+    case 'a': debouncedKeyboardZoom.exec(0.9); break
+    case 'z': debouncedKeyboardZoom.exec(1.1); break
+    case 'ArrowUp': debouncedKeyboardPan.exec(0, 5); break
+    case 'ArrowRight': debouncedKeyboardPan.exec(-5, 0); break
+    case 'ArrowDown': debouncedKeyboardPan.exec(0, -5); break
+    case 'ArrowLeft': debouncedKeyboardPan.exec(5, 0); break
   }
 })

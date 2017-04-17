@@ -21,7 +21,7 @@ const prepareVertexPositions = (gl, program) => {
 }
 
 export default class {
-  constructor({
+  constructor ({
     canvas,
     constant = {x: -0.828, y: -0.180},
     complexCenter = {x: 0, y: 0},
@@ -38,19 +38,19 @@ export default class {
     this.render()
   }
 
-  pan(pixelDeltaX, pixelDeltaY) {
+  pan (pixelDeltaX, pixelDeltaY) {
     const pixelToDistanceRatio = this.xLength / this.gl.canvas.width
     this.complexCenter.x -= pixelDeltaX * pixelToDistanceRatio
     this.complexCenter.y += pixelDeltaY * pixelToDistanceRatio
     this.render()
   }
 
-  zoom(multiplier) {
+  zoom (multiplier) {
     this.xLength *= multiplier
     this.render()
   }
 
-  render() {
+  render () {
     const gl = this.gl
     const program = this.program
 
