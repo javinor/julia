@@ -22,7 +22,10 @@ section {
   border: 2px solid lightgrey;
   border-radius: 12px;
   background: rgba(250, 240, 230, 0.6);
+  pointer-events:none;
 }
+
+section a { pointer-events: auto; }
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
