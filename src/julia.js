@@ -1,9 +1,8 @@
 'use strict'
 
 const webglUtils = require('./webgl-utils')
-const juliaShaders = require('./juliaShaders')
-const vertexShaderSource = juliaShaders.vertexShaderSource
-const fragmentShaderSource = juliaShaders.fragmentShaderSource
+const vertexShaderSource = require('./shaders/julia.vertex.glsl')
+const fragmentShaderSource = require('./shaders/julia.fragment.glsl')
 
 const generateProgram = (gl) => {
   const vertexShader = webglUtils.createShader(gl, gl.VERTEX_SHADER, vertexShaderSource)
