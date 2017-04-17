@@ -34,9 +34,9 @@ document.addEventListener('keydown', (e) => {
   switch (e.key) {
     case 'a': debouncedKeyboardZoom.exec(0.9); break
     case 'z': debouncedKeyboardZoom.exec(1.1); break
-    case 'ArrowUp': debouncedKeyboardPan.exec(0, 5); break
-    case 'ArrowRight': debouncedKeyboardPan.exec(-5, 0); break
-    case 'ArrowDown': debouncedKeyboardPan.exec(0, -5); break
-    case 'ArrowLeft': debouncedKeyboardPan.exec(5, 0); break
+    case 'ArrowUp': debouncedKeyboardPan.exec(0, 10); break
+    case 'ArrowRight': debouncedKeyboardPan.exec(-10, 0); break
+    case 'ArrowDown': debouncedKeyboardPan.exec(0, -10); break
+    case 'ArrowLeft': debouncedKeyboardPan.exec(10, 0); break
   }
 })
