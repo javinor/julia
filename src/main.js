@@ -5,17 +5,21 @@ import Julia from './julia'
 import Debouncer from './utils/Debouncer'
 
 const canvas = document.getElementById('julia')
+const juliaConstantEl = document.getElementById('constant')
 const julia = new Julia({
   canvas,
   complexCenter: {x: 0, y: 0},
-  constant: {x: -0.810, y: 0.288},
+  constant: JSON.parse(juliaConstantEl.innerText),
   xLength: 4
 })
 
 const debouncedRender = new Debouncer(() => julia.render())
 window.onresize = () => debouncedRender.exec()
 
-const debouncedChangeConstant = new Debouncer((pixelPoint) => julia.changeConstant(pixelPoint))
+const debouncedChangeConstant = new Debouncer((pixelPoint) => {
+  julia.changeConstant(pixelPoint)
+  juliaConstantEl.innerText = JSON.stringify(julia.constant, (key, value) => isNaN(value) ? value : value.toFixed(3))
+})
 canvas.addEventListener('dblclick', (e) => {
   debouncedChangeConstant.exec({
     x: e.clientX,
