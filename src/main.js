@@ -2,7 +2,7 @@
 
 require('./main.css')
 import Julia from './julia'
-import Debouncer from './Debouncer'
+import Debouncer from './utils/Debouncer'
 
 const canvas = document.getElementById('julia')
 const julia = new Julia({canvas})
