@@ -128,7 +128,7 @@ const prepareVertexPositions = (gl, program) => {
 /* harmony default export */ __webpack_exports__["a"] = (class {
   constructor ({
     canvas,
-    constant = {x: -0.828, y: -0.180},
+    constant = {x: -0.706, y: -0.409},
     complexCenter = {x: 0, y: 0},
     xLength = 4
   } = {}) {
@@ -233,7 +233,7 @@ exports = module.exports = __webpack_require__(4)();
 
 
 // module
-exports.push([module.i, "html, body {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  font-family: 'Inconsolata', monospace;\n}\n\ncanvas {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n\nsection {\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  width: 300px;\n  padding: 0 20px 0 0;\n  border: 2px solid lightgrey;\n  border-radius: 12px;\n  background: rgba(250, 240, 230, 0.6);\n}\n\n.noselect {\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n}\n\nh1 { text-align: center;}\nh4 {\n  text-align: center;\n  margin: 0;\n}\n", ""]);
+exports.push([module.i, "html, body {\n  width: 100%;\n  height: 100%;\n  margin: 0;\n  font-family: 'Inconsolata', monospace;\n}\n\ncanvas {\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n}\n\nsection {\n  position: absolute;\n  top: 20px;\n  left: 20px;\n  width: 300px;\n  padding: 0 20px 0 0;\n  border: 2px solid lightgrey;\n  border-radius: 12px;\n  background: rgba(250, 240, 230, 0.6);\n  pointer-events:none;\n}\n\nsection a { pointer-events: auto; }\n\n.noselect {\n  -webkit-touch-callout: none; /* iOS Safari */\n    -webkit-user-select: none; /* Safari */\n     -khtml-user-select: none; /* Konqueror HTML */\n       -moz-user-select: none; /* Firefox */\n        -ms-user-select: none; /* Internet Explorer/Edge */\n            user-select: none; /* Non-prefixed version, currently\n                                  supported by Chrome and Opera */\n}\n\nh1 { text-align: center;}\nh4 {\n  text-align: center;\n  margin: 0;\n}\n", ""]);
 
 // exports
 
@@ -604,10 +604,10 @@ document.addEventListener('keydown', (e) => {
   switch (e.key) {
     case 'a': debouncedKeyboardZoom.exec(0.9); break
     case 'z': debouncedKeyboardZoom.exec(1.1); break
-    case 'ArrowUp': debouncedKeyboardPan.exec(0, 5); break
-    case 'ArrowRight': debouncedKeyboardPan.exec(-5, 0); break
-    case 'ArrowDown': debouncedKeyboardPan.exec(0, -5); break
-    case 'ArrowLeft': debouncedKeyboardPan.exec(5, 0); break
+    case 'ArrowUp': debouncedKeyboardPan.exec(0, 10); break
+    case 'ArrowRight': debouncedKeyboardPan.exec(-10, 0); break
+    case 'ArrowDown': debouncedKeyboardPan.exec(0, -10); break
+    case 'ArrowLeft': debouncedKeyboardPan.exec(10, 0); break
   }
 })
 
