@@ -5,77 +5,35 @@ import Julia from './julia'
 import Debouncer from './utils/Debouncer'
 
 const canvas = document.getElementById('julia')
-const julia = new Julia({canvas})
-
-const width = canvas.width
-const renderOptions = {
-  complexCenter: [0, 0],
-  constant: [-0.828, -0.180],
+const julia = new Julia({
+  canvas,
+  complexCenter: {x: 0, y: 0},
+  constant: {x: -0.828, y: -0.180},
   xLength: 4
+})
+
+const debouncedRender = new Debouncer(() => julia.render())
+window.onresize = () => debouncedRender.exec()
+
+const debouncedPan = new Debouncer(({pixelDeltaX, pixelDeltaY}) => julia.pan(pixelDeltaX, pixelDeltaY))
+let prevMouseCoords;
+const mouseMoveListener = (e) => {
+  const pixelDeltaX = e.clientX - prevMouseCoords.x
+  const pixelDeltaY = e.clientY - prevMouseCoords.y
+  debouncedPan.exec({pixelDeltaX, pixelDeltaY})
+  prevMouseCoords.x = e.clientX
+  prevMouseCoords.y = e.clientY
 }
-const render = new Debouncer((options) => {
-  julia.render(options)
-})
-render.exec(renderOptions)
-window.onresize = () => {
-  render.exec(renderOptions)
-}
-
-const mouseDownCoords = {}
-
-const zoom = new Debouncer((zoomIn) => {
-  const multiplier = zoomIn ? 0.9 : 1.1
-  renderOptions.xLength *= multiplier
-  julia.render(renderOptions)
+canvas.addEventListener('mouseup', () => canvas.removeEventListener('mousemove', mouseMoveListener))
+canvas.addEventListener('mousedown', (e) => {
+  prevMouseCoords = { x: e.clientX, y: e.clientY }
+  canvas.addEventListener('mousemove', mouseMoveListener)
 })
 
-const pan = new Debouncer((e) => {
-  const pixelToDistanceRatio = renderOptions.xLength / width
-  renderOptions.complexCenter[0] -= e.movementX * pixelToDistanceRatio
-  renderOptions.complexCenter[1] += e.movementY * pixelToDistanceRatio
-  window.requestAnimationFrame(julia.render.bind(julia, renderOptions))
-})
-const panEventHandler = (e) => pan.exec(e)
-
-canvas.addEventListener('mousedown', () => canvas.addEventListener('mousemove', panEventHandler))
-canvas.addEventListener('mouseup', () => canvas.removeEventListener('mousemove', panEventHandler))
-
-document.addEventListener('keydown', (event) => {
-  const keyName = event.key;
-  if (keyName === 'a') {
-    zoom.exec(true)
-  } else if (keyName === 'z') {
-    zoom.exec(false)
+const zoom = new Debouncer((multiplier) => julia.zoom(multiplier))
+document.addEventListener('keydown', (e) => {
+  switch (e.key) {
+    case 'a': zoom.exec(0.9); break;
+    case 'z': zoom.exec(1.1); break;
   }
 })
-
-
-
-
-
-
-
-
-
-// const rerenderJulia = (e) => {
-//   const pixelToDistanceRatio = renderOptions.xLength / width
-//   renderOptions.complexCenter[0] -= e.movementX * pixelToDistanceRatio
-//   renderOptions.complexCenter[1] += e.movementY * pixelToDistanceRatio
-//   window.requestAnimationFrame(julia.render.bind(julia, renderOptions))
-// }
-//
-// canvas.addEventListener('mousedown', () => canvas.addEventListener('mousemove', rerenderJulia))
-// canvas.addEventListener('mouseup', () => canvas.removeEventListener('mousemove', rerenderJulia))
-// canvas.addEventListener('dblclick', (e) => {
-//   const pixelToDistanceRatio = renderOptions.xLength / width
-//   // renderOptions.complexCenter[0] -= e.offsetX * pixelToDistanceRatio
-//   // renderOptions.complexCenter[1] += e.movementY * pixelToDistanceRatio
-//   renderOptions.xLength /= 2
-//   window.requestAnimationFrame(julia.render.bind(julia, renderOptions))
-// })
-
-// window.onmousewheel = (e) => {
-//   const multiplier = event.wheelDelta > 0 ? 1.01 : 0.99
-//   renderOptions.xLength /= multiplier
-//   window.requestAnimationFrame(julia.render.bind(julia, renderOptions))
-// }
