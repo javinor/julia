@@ -1,19 +1,13 @@
 'use strict'
 
-const webglUtils = require('./webgl-utils')
+const webglUtils = require('./utils/webgl-utils')
 const vertexShaderSource = require('./shaders/julia.vertex.glsl')
 const fragmentShaderSource = require('./shaders/julia.fragment.glsl')
-
-const generateProgram = (gl) => {
-  const vertexShader = webglUtils.createShader(gl, gl.VERTEX_SHADER, vertexShaderSource)
-  const fragmentShader = webglUtils.createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource)
-  return webglUtils.createProgram(gl, vertexShader, fragmentShader)
-}
 
 export default class {
   constructor({canvas}) {
     const gl = this.gl = canvas.getContext('webgl')
-    const program = this.program = generateProgram(gl)
+    const program = this.program = webglUtils.createProgram(gl, vertexShaderSource, fragmentShaderSource)
 
     const positions = [-1, 1, 1, 1, -1, -1, -1, -1, 1, 1, 1, -1]
     const positionBuffer = gl.createBuffer()
