@@ -8,12 +8,20 @@ const canvas = document.getElementById('julia')
 const julia = new Julia({
   canvas,
   complexCenter: {x: 0, y: 0},
-  constant: {x: -0.828, y: -0.180},
+  constant: {x: -0.810, y: 0.288},
   xLength: 4
 })
 
 const debouncedRender = new Debouncer(() => julia.render())
 window.onresize = () => debouncedRender.exec()
+
+const debouncedChangeConstant = new Debouncer((pixelPoint) => julia.changeConstant(pixelPoint))
+canvas.addEventListener('dblclick', (e) => {
+  debouncedChangeConstant.exec({
+    x: e.clientX,
+    y: e.clientY
+  })
+})
 
 let prevMouseCoords
 const debouncedMousePan = new Debouncer((e) => {
