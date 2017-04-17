@@ -23,7 +23,7 @@ const prepareVertexPositions = (gl, program) => {
 export default class {
   constructor ({
     canvas,
-    constant = {x: -0.828, y: -0.180},
+    constant = {x: -0.706, y: -0.409},
     complexCenter = {x: 0, y: 0},
     xLength = 4
   } = {}) {
