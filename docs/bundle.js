@@ -164,7 +164,7 @@ const prepareVertexPositions = (gl, program) => {
 
     this.constant = {
       x: this.complexCenter.x + pixelPoint.x * pixelToDistanceRatio - xLength / 2,
-      y: this.complexCenter.y + pixelPoint.y * pixelToDistanceRatio - yLength / 2
+      y: this.complexCenter.y - (pixelPoint.y * pixelToDistanceRatio - yLength / 2)
     }
 
     this.render()
