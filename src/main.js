@@ -13,7 +13,13 @@ const renderOptions = {
   constant: [-0.828, -0.180],
   xLength: 4
 }
-julia.render(renderOptions)
+const render = new Debouncer((options) => {
+  julia.render(options)
+})
+render.exec(renderOptions)
+window.onresize = () => {
+  render.exec(renderOptions)
+}
 
 const mouseDownCoords = {}
 
@@ -42,7 +48,6 @@ document.addEventListener('keydown', (event) => {
     zoom.exec(false)
   }
 })
-
 
 
 
