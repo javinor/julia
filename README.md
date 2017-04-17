@@ -1,3 +1,4 @@
 # Julia Sets
 
-See https://javinor.github.io/julia/ for live demo.
+* See https://javinor.github.io/julia/ for live demo.
+* Using WebGL.
