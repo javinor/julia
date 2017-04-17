@@ -7,5 +7,5 @@ varying vec2 complexPoint;
 
 void main() {
   gl_Position = vec4(a_position, 0, 1);
-  complexPoint = a_position * axisLengths + complexCenter;
+  complexPoint = (a_position / 2.0) * axisLengths + complexCenter;
 }
