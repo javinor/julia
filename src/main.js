@@ -11,7 +11,7 @@ const julia = new Julia({
   canvas,
   complexCenter: {x: 0, y: 0},
   constant: JSON.parse(juliaConstantEl.innerText),
-  xLength: 4
+  xLength: 8
 })
 
 const axes = new Axes({
