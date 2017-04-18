@@ -25,15 +25,10 @@ void main() {
 
   if (length(vec2(x,y)) > 4.0) {
     // http://www.iquilezles.org/www/articles/palettes/palettes.htm
-    //vec3 a = vec3(0.5, 0.5, 0.5);
-    //vec3 b = vec3(0.5, 0.5, 0.5);
-    //vec3 c = vec3(1.0,1.0,.5);
-    //vec3 d = vec3(0.90, 0.10, 0.20);
-
     vec3 a = vec3(0.5, 0.5, 0.5);
     vec3 b = vec3(0.5, 0.5, 0.5);
-    vec3 c = vec3(0.3, 0.5, 0.7);
-    vec3 d = vec3(0.4, 0.15, 0.20);
+    vec3 c = vec3(1.0, 1.0, 1.0);
+    vec3 d = vec3(0.6, 0.4, 0.2);
 
     iter -= log2(log2(length(vec2(x,y))));
 
