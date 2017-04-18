@@ -17345,7 +17345,7 @@ const julia = new __WEBPACK_IMPORTED_MODULE_1__julia__["a" /* default */]({
   canvas,
   complexCenter: {x: 0, y: 0},
   constant: JSON.parse(juliaConstantEl.innerText),
-  xLength: 4
+  xLength: 8
 })
 
 const axes = new __WEBPACK_IMPORTED_MODULE_3__utils_Axes__["a" /* default */]({
