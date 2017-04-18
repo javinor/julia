@@ -3,6 +3,7 @@
 import './main.css'
 import Julia from './julia'
 import Debouncer from './utils/Debouncer'
+import Axes from './utils/Axes'
 
 const canvas = document.getElementById('julia')
 const juliaConstantEl = document.getElementById('constant')
@@ -13,7 +14,22 @@ const julia = new Julia({
   xLength: 4
 })
 
-const debouncedRender = new Debouncer(() => julia.render())
+const axes = new Axes({
+  center: julia.complexCenter,
+  xLength: julia.xLength,
+  yLength: julia.xLength * canvas.height / canvas.width,
+  distanceToPixelRatio: julia.xLength / canvas.width
+})
+
+const debouncedRender = new Debouncer(() => {
+  julia.render()
+  axes.render({
+    center: julia.complexCenter,
+    xLength: julia.xLength,
+    yLength: julia.xLength * canvas.height / canvas.width,
+    distanceToPixelRatio: julia.xLength / canvas.width
+  })
+})
 window.onresize = () => debouncedRender.exec()
 
 const debouncedChangeConstant = new Debouncer((pixelPoint) => {
@@ -39,4 +55,11 @@ document.addEventListener('keydown', (e) => {
     case 'ArrowDown': debouncedKeyboardPan.exec(0, -10); break
     case 'ArrowLeft': debouncedKeyboardPan.exec(10, 0); break
   }
+
+  axes.render({
+    center: julia.complexCenter,
+    xLength: julia.xLength,
+    yLength: julia.xLength * canvas.height / canvas.width,
+    distanceToPixelRatio: julia.xLength / canvas.width
+  })
 })

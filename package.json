@@ -23,6 +23,7 @@
     "webpack-dev-server": "^1.16.3"
   },
   "dependencies": {
+    "d3": "^4.8.0",
     "webpack-glsl-loader": "^1.0.1"
   }
 }
