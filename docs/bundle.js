@@ -17313,7 +17313,7 @@ function updateLink(linkElement, obj) {
 /* 8 */
 /***/ (function(module, exports) {
 
-module.exports = "precision highp float;\n\nuniform vec2 constant;\nvarying vec2 complexPoint;\n\nvoid main() {\n  vec4 black = vec4(0, 0, 0, 1);\n\n  float iter = 0.0;\n  float x = complexPoint.x;\n  float y = complexPoint.y;\n  float tempX;\n  float tempY;\n\n  for (int i = 0; i < 1000; i++) {\n    iter += 1.0;\n    tempX = x * x - y * y;\n    tempY = 2.0 * x * y;\n\n    x = tempX + constant.x;\n    y = tempY + constant.y;\n\n    if (length(vec2(x,y)) > 4.0) break;\n  }\n\n  if (length(vec2(x,y)) > 4.0) {\n    // http://www.iquilezles.org/www/articles/palettes/palettes.htm\n    vec3 a = vec3(0.5, 0.5, 0.5);\n    vec3 b = vec3(0.5, 0.5, 0.5);\n    vec3 c = vec3(1.0, 1.0, 1.0);\n    vec3 d = vec3(0.6, 0.4, 0.2);\n\n    iter -= log2(log2(length(vec2(x,y))));\n\n    gl_FragColor = vec4(a + b * cos(6.28318 * (c * iter + d)), 1);\n  } else {\n    gl_FragColor = black;\n  }\n}\n"
+module.exports = "precision highp float;\n\nuniform vec2 constant;\nvarying vec2 complexPoint;\n\nvoid main() {\n  vec4 black = vec4(0, 0, 0, 1);\n\n  float iter = 0.0;\n  float x = complexPoint.x;\n  float y = complexPoint.y;\n  float tempX;\n  float tempY;\n\n  for (int i = 0; i < 1000; i++) {\n    iter += 1.0;\n    tempX = x * x - y * y;\n    tempY = 2.0 * x * y;\n\n    x = tempX + constant.x;\n    y = tempY + constant.y;\n\n    if (length(vec2(x,y)) > 256.0) break;\n  }\n\n  if (length(vec2(x,y)) > 256.0) {\n    // http://www.iquilezles.org/www/articles/palettes/palettes.htm\n    vec3 a = vec3(0.5, 0.5, 0.5);\n    vec3 b = vec3(0.5, 0.5, 0.5);\n    vec3 c = vec3(1.0, 1.0, 1.0);\n    vec3 d = vec3(0.6, 0.4, 0.2);\n\n    iter -= log2(log2(length(vec2(x,y))));\n\n    vec3 color = a + b * cos(6.28318 * (c * iter + d));\n    gl_FragColor = vec4(color * 0.8, 1);\n  } else {\n    gl_FragColor = black;\n  }\n}\n"
 
 /***/ }),
 /* 9 */
@@ -17381,13 +17381,14 @@ canvas.addEventListener('mousedown', (e) => {
 const debouncedKeyboardZoom = new __WEBPACK_IMPORTED_MODULE_2__utils_Debouncer__["a" /* default */]((multiplier) => julia.zoom(multiplier))
 const debouncedKeyboardPan = new __WEBPACK_IMPORTED_MODULE_2__utils_Debouncer__["a" /* default */]((dx, dy) => julia.pan(dx, dy))
 document.addEventListener('keydown', (e) => {
+  const step = 20
   switch (e.key) {
     case 'a': debouncedKeyboardZoom.exec(0.9); break
     case 'z': debouncedKeyboardZoom.exec(1.1); break
-    case 'ArrowUp': debouncedKeyboardPan.exec(0, 10); break
-    case 'ArrowRight': debouncedKeyboardPan.exec(-10, 0); break
-    case 'ArrowDown': debouncedKeyboardPan.exec(0, -10); break
-    case 'ArrowLeft': debouncedKeyboardPan.exec(10, 0); break
+    case 'ArrowUp': debouncedKeyboardPan.exec(0, step); break
+    case 'ArrowRight': debouncedKeyboardPan.exec(-step, 0); break
+    case 'ArrowDown': debouncedKeyboardPan.exec(0, -step); break
+    case 'ArrowLeft': debouncedKeyboardPan.exec(step, 0); break
   }
 
   axes.render({
