@@ -20,10 +20,10 @@ void main() {
     x = tempX + constant.x;
     y = tempY + constant.y;
 
-    if (length(vec2(x,y)) > 4.0) break;
+    if (length(vec2(x,y)) > 256.0) break;
   }
 
-  if (length(vec2(x,y)) > 4.0) {
+  if (length(vec2(x,y)) > 256.0) {
     // http://www.iquilezles.org/www/articles/palettes/palettes.htm
     vec3 a = vec3(0.5, 0.5, 0.5);
     vec3 b = vec3(0.5, 0.5, 0.5);
