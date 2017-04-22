@@ -32,7 +32,8 @@ void main() {
 
     iter -= log2(log2(length(vec2(x,y))));
 
-    gl_FragColor = vec4(a + b * cos(6.28318 * (c * iter + d)), 1);
+    vec3 color = a + b * cos(6.28318 * (c * iter + d));
+    gl_FragColor = vec4(color * 0.8, 1);
   } else {
     gl_FragColor = black;
   }
