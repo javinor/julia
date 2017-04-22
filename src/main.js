@@ -47,13 +47,14 @@ canvas.addEventListener('mousedown', (e) => {
 const debouncedKeyboardZoom = new Debouncer((multiplier) => julia.zoom(multiplier))
 const debouncedKeyboardPan = new Debouncer((dx, dy) => julia.pan(dx, dy))
 document.addEventListener('keydown', (e) => {
+  const step = 20
   switch (e.key) {
     case 'a': debouncedKeyboardZoom.exec(0.9); break
     case 'z': debouncedKeyboardZoom.exec(1.1); break
-    case 'ArrowUp': debouncedKeyboardPan.exec(0, 10); break
-    case 'ArrowRight': debouncedKeyboardPan.exec(-10, 0); break
-    case 'ArrowDown': debouncedKeyboardPan.exec(0, -10); break
-    case 'ArrowLeft': debouncedKeyboardPan.exec(10, 0); break
+    case 'ArrowUp': debouncedKeyboardPan.exec(0, step); break
+    case 'ArrowRight': debouncedKeyboardPan.exec(-step, 0); break
+    case 'ArrowDown': debouncedKeyboardPan.exec(0, -step); break
+    case 'ArrowLeft': debouncedKeyboardPan.exec(step, 0); break
   }
 
   axes.render({
